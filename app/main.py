@@ -1,7 +1,15 @@
-from data_source import stream_data
+from fastapi import FastAPI
 
-def main():
-    stream_data(interval=2, total_records=50)
-    
-if __name__ == "__main__":
-    main()
+app = FastAPI()
+
+@app.get('/trigger')
+async def trigger():
+    return {"message": "Data pipeline was triggered."}
+
+@app.get('/latest')
+async def get_latest():
+    return {"result": []}
+
+@app.get('/query')
+async def query_data():
+    return {"result": []}
