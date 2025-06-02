@@ -16,6 +16,7 @@ uvicorn app.main:app --reload
 ### Overview
 This application simulates a rea-time data stream, processes the data using pandas, and serves the results through an asynchronous REST API built with FastAPI.  The architecture supports concurrent ingestion, transformation, and querying operations. 
 ### Architecture
+<pre>
                 +---------------------------+
                 |   Simulated Data Source   |
                 | (JSON with timestamp, ID) |
@@ -52,7 +53,7 @@ This application simulates a rea-time data stream, processes the data using pand
 | Returns latest   |           | Filter by time window    |
 | processed data   |           | on 'timestamp' field     |
 +------------------+           +--------------------------+
-
+</pre>
 
 ### Key Components
 __1. Simulated Data Ingestion (app/data_source.py)__
@@ -97,4 +98,4 @@ __6. Assumption__
 __7. Limitations__
 * No persistent storage (data is lost on start and reset for new messages)
 * Fixed batch size of 10, no dynamic tuning
-* No authentication or reate-limiting on the API's
+* No authentication or rate-limiting on the API's
