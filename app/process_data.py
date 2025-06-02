@@ -1,6 +1,22 @@
+from typing import List
 import pandas as pd
 
-def process_data(data):
+def process_data(data: List[dict]) -> tuple:
+    """
+    Summary:  Process the input data to create a DataFrame, melted DataFrame, and pivoted DataFrame.\n
+    Description: This function takes a list of dictionaries containing 'timestamp', 'id', and 'value',
+    converts it into a DataFrame, and performs several transformations including melting and pivoting.\n
+    It also calculates a moving average of the 'value' column based on the 'timestamp'.
+    The resulting DataFrame, melted DataFrame, and pivoted DataFrame are returned as a tuple.
+    Args:
+        data (list of dict): Input data where each dict contains 'timestamp', 'id', and 'value'.
+    Returns:
+        tuple: A tuple containing:
+            - df (DataFrame): The original data as a DataFrame with 'timestamp' converted to datetime.
+            - melted (DataFrame): The melted version of the DataFrame.
+            - pivoted (DataFrame): The pivoted version of the DataFrame.
+    """
+
     df = pd.DataFrame(data)
     df['timestamp'] = pd.to_datetime(df['timestamp']) # for easy query by timestamp
 
@@ -12,6 +28,7 @@ def process_data(data):
     df.set_index('timestamp', inplace=True)
     df['moving_avg'] = df['value'].rolling('5s').mean()
 
+    # Reset index for the final DataFrame
     return df.reset_index(), melted, pivoted
 
 def main():

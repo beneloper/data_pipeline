@@ -1,8 +1,22 @@
 
-from process_data import process_data
+from asyncio import Queue
 
+from app.process_data import process_data
 
-async def consume_data(queue, results):
+async def consume_data(queue: Queue, results: dict) -> None:
+    """
+    Summary: Consume data from the queue and process it in batches.\n
+    Description: This function continuously consumes data from the provided asyncio queue.\n
+    It collects data in batches of 10, processes each batch, and updates the results\n
+    dictionary with the latest, melted, and pivoted data.
+
+    Args:
+        queue (Queue): The asyncio queue from which data will be consumed.
+        results (dict): A dictionary to store the processed results, including 'latest', 'melted', and 'pivoted' data.
+    Returns:
+        None
+    """    
+    
     buffer = []
     while True:
         data = await queue.get()
