@@ -24,3 +24,21 @@ async def stream_data(queue: asyncio.Queue, interval: int):
         }
         await queue.put(data)
         await asyncio.sleep(interval) # simulate n-seconds intervals
+
+
+if __name__ == "__main__":
+    def main():
+        queue = asyncio.Queue()
+        interval = 5  # seconds
+
+        loop = asyncio.get_event_loop()
+        try:
+            loop.run_until_complete(stream_data(queue, interval))
+        except KeyboardInterrupt:
+            print("Streaming stopped by user.")
+            print(queue.qsize(), "items left in the queue.")
+            print(queue)
+        finally:
+            loop.close()
+
+    main()

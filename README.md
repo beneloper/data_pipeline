@@ -76,7 +76,7 @@ __2. Async Data Processing (app/consume.py and app/process.py)__
 __3. REST API (app/main.py)__
 * GET /trigger: prints info of pipeline was triggered at startup
 * GET /latest: returns the latest processed batch
-* GET /query?start&end: filters results by timestamp range (optional, returns latest of not provided).  Example:
+* GET /query?start&end: filters results by timestamp range (optional, returns latest if not provided).  Example:
 
     * /query?start=2025-06-01T21:15:07&end=2025-06-01T21:15:08
     * /query?start=2025-06-01T21:15:07
